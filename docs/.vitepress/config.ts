@@ -215,7 +215,7 @@ export default defineConfig({
             },
          },
       },
-      socialLinks: [{ icon: "github", link: "https://github.com" }],
+      socialLinks: [{ icon: "github", link: "https://github.com/toothdy" }],
       footer: {
          message: "uvx-ui · uni-app x 组件库",
          copyright: "Released under the MIT License.",
