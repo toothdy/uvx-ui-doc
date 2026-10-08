@@ -1,0 +1,249 @@
+// 隐藏全站滚动条（保留滚动功能）
+::-webkit-scrollbar {
+   display: none;
+}
+
+* {
+   scrollbar-width: none;
+}
+
+:root {
+   --vp-nav-logo-height: 48px;
+   --vp-sidebar-bg-color: var(--vp-c-bg);
+   --vp-layout-max-width: 1680px;
+   // 侧栏宽度全断点固定，不随屏幕区间切换
+   --vp-sidebar-width: 220px;
+}
+
+// 侧栏右侧分隔线从导航栏下方开始
+// 注意：默认主题在 ≥960px 时给 .VPSidebar 设了 transform:translateX(0)（供移动端抽屉动画用，桌面端为恒等变换），
+// 非 none 的 transform 会把其 fixed 伪元素的包含块从视口劫持成侧栏自身——侧栏又是滚动容器，
+// 导致分隔线随侧栏内容滚走、且 ≥1440 的视口百分比公式失效被裁掉。
+// 桌面端还原 transform:none 让分隔线回到视口坐标系，任意断点、任意滚动位置都稳定
+@media (min-width: 960px) {
+   .VPSidebar {
+      transform: none !important;
+   }
+
+   .VPSidebar::after {
+      position: fixed;
+      top: calc(var(--vp-layout-top-height, 0px) + var(--vp-nav-height));
+      bottom: 0;
+      left: calc(var(--vp-sidebar-width) - 1px);
+      width: 1px;
+      background-color: var(--vp-c-divider);
+      content: "";
+      pointer-events: none;
+   }
+}
+
+// ≥1440px：默认主题把布局居中留白 (100vw - (layout-max - 64px)) / 2 并进侧栏/导航标题/正文起始位置，
+// 本项目 layout-max=1680，视口 1440-1679 时该项为负，侧栏盒宽会被压扁（如 1440 屏仅 60px）且随视口变化。
+// 本站 ≥1680 已用 max-width:none 放弃内容居中，这里把居中分支一并还原为纯变量值，
+// 使侧栏盒宽在所有 ≥960 断点恒等于 var(--vp-sidebar-width)
+@media (min-width: 1440px) {
+   .VPSidebar {
+      padding-left: 32px !important;
+      width: var(--vp-sidebar-width) !important;
+   }
+
+   // 子选择器链只命中 VPNavBar 的 .title 包装 DIV；
+   // 不能用后代选择器（会连带命中 VPNavBarTitle 内层同名 a.title，造成双层 32px 内边距）
+   .VPNavBar .container > .title {
+      padding-left: 32px !important;
+      width: var(--vp-sidebar-width) !important;
+   }
+
+   .VPNavBar.has-sidebar .content {
+      padding-left: var(--vp-sidebar-width) !important;
+   }
+
+   .VPContent.has-sidebar {
+      padding-left: var(--vp-sidebar-width) !important;
+   }
+}
+
+// 导航栏文字禁止鼠标选中
+.VPNav {
+   user-select: none;
+}
+
+// 导航栏底线合并为一条连续分隔线
+.VPNavBar.has-sidebar .divider {
+   padding-left: 0 !important;
+}
+
+.VPNavBarTitle.has-sidebar .title {
+   border-bottom-color: transparent !important;
+}
+
+// ===== 移动端抽屉菜单（<768px 汉堡按钮）展开时的多条下边框 =====
+// 1) screen-open 时主题给导航栏加 border-bottom，与导航栏下方常驻的 divider-line 叠成两条 1px 线；
+//    统一只保留 divider-line 一条
+.VPNavBar.screen-open {
+   border-bottom: none !important;
+}
+
+// 2) 开/关动画期间（0.25s 淡入淡出）抽屉屏是半透明的，会透出下方 VPLocalNav 自带的下边框，
+//    形成"多条线闪现"；动画期间直接隐藏局部导航（展开时其区域本就被抽屉屏覆盖）
+.Layout:has(.VPNavBar.screen-open) .VPLocalNav {
+   display: none;
+}
+
+// 首页（sidebar:false）的标题走 flex 流 + 1616px 居中容器，logo 位置随屏宽漂移（>1680 后右移），
+// 与文档页（标题绝对定位 left:0，恒在 x=32px）不一致；此处统一钉在视口左侧
+@media (min-width: 960px) {
+   .VPNavBar:not(.has-sidebar) .container > .title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: var(--vp-sidebar-width);
+      padding: 0 32px;
+   }
+}
+
+// 搜索框默认 flex-grow:1 横向撑满（文档页从侧栏右侧一直铺到菜单），改为不撑开、
+// 与右侧菜单并排靠右，全站导航栏布局一致且不会与绝对定位的标题重叠
+.VPNavBar .VPNavBarSearch {
+   flex-grow: 0;
+}
+
+// 移动端表格横向滚动
+@media (max-width: 768px) {
+   .vp-doc table {
+      display: block;
+      overflow-x: auto;
+   }
+
+   .vp-doc table th,
+   .vp-doc table td {
+      white-space: nowrap;
+   }
+}
+
+// ===== H5 手机预览 =====
+.h5-preview {
+   position: fixed;
+   top: calc((100vh - 330px * 1813 / 868 - 3.6rem) / 2 + 3.6rem);
+   right: 20px;
+   z-index: 10;
+   width: 330px;
+   height: calc(330px * 1813 / 868);
+   margin: 0;
+   overflow: hidden;
+   box-sizing: border-box;
+   padding: 40px 10px 20px;
+   border-radius: 30px;
+   background-image: url("/common/Xiaomi17.png");
+   background-repeat: no-repeat;
+   background-size: 100%;
+   font-size: 16px;
+}
+
+.h5-preview-content {
+   height: 100%;
+   overflow: hidden;
+   border-radius: 5px 5px 30px 30px;
+}
+
+.h5-preview-iframe {
+   display: block;
+   width: 100%;
+   height: 100%;
+   border-radius: 20px 20px 45px 45px;
+}
+
+.h5-preview-loading,
+.h5-preview-empty {
+   display: grid;
+   height: 100%;
+   place-items: center;
+   padding: 24px;
+   color: #5e6d82;
+   text-align: center;
+}
+
+@media (max-width: 1300px) {
+   .h5-preview {
+      display: none;
+   }
+}
+
+// 1301-1449px：沿用旧站的窄桌面布局
+@media (min-width: 1301px) and (max-width: 1449px) {
+   .VPDoc .content-container,
+   .vp-doc {
+      max-width: none;
+   }
+
+   .VPDoc:has(.h5-preview) .content-container {
+      padding-right: 370px;
+   }
+
+   .h5-preview {
+      display: block;
+      right: 20px;
+   }
+}
+
+// 1450-1679px：增加预览间距
+@media (min-width: 1450px) and (max-width: 1679px) {
+   .VPDoc .content-container,
+   .vp-doc {
+      max-width: none;
+   }
+
+   .VPDoc:has(.h5-preview) .content-container {
+      padding-right: 370px;
+   }
+
+   .h5-preview {
+      display: block;
+      right: 30px;
+   }
+}
+
+// >=1680px：固定主体宽度并居中预览
+@media (min-width: 1680px) {
+   .VPDoc .content-container,
+   .vp-doc {
+      max-width: none;
+   }
+
+   .VPDoc:has(.h5-preview) .content-container {
+      padding-right: 370px;
+   }
+
+   .h5-preview {
+      display: block;
+      right: calc((100% - 1680px) / 2);
+   }
+}
+
+// >=1920px：增加正文与预览的间距
+@media (min-width: 1920px) {
+   .VPDoc:has(.h5-preview) .content-container {
+      padding-right: 390px;
+   }
+}
+
+// ===== 表格 =====
+
+// 桌面端表格正常铺开；不能裸写——源码顺序会覆盖上方移动端的 display:block 剪裁，
+// 导致窄屏表格撑破 body（实测撑到 1418px），fixed 定位的搜索弹层等随之尺寸错乱
+@media (min-width: 769px) {
+   .vp-doc table {
+      display: table;
+      width: 100%;
+   }
+}
+
+.vp-doc th:nth-child(5),
+.vp-doc td:nth-child(5) {
+   white-space: nowrap;
+}
+
+.vp-doc th:nth-child(4),
+.vp-doc td:nth-child(4):not(:has(code)) {
+   white-space: nowrap;
+}

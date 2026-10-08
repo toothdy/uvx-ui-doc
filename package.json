@@ -1,0 +1,21 @@
+{
+   "name": "uvx-ui-doc",
+   "version": "0.1.0",
+   "private": true,
+   "description": "uvx-ui 组件库文档网站",
+   "type": "module",
+   "scripts": {
+      "dev": "vitepress dev docs",
+      "build": "vitepress build docs",
+      "preview": "vitepress preview docs"
+   },
+   "devDependencies": {
+      "@element-plus/icons-vue": "^2.3.2",
+      "@types/node": "^26.6.3",
+      "element-plus": "2.14.6",
+      "sass": "1.105.0",
+      "typescript": "^7.0.2",
+      "vitepress": "1.6.4",
+      "vue": "3.5.43"
+   }
+}
