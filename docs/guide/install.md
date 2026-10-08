@@ -1,6 +1,6 @@
 # 安装
 
-本章说明如何把 uvx-ui 接入现有 uni-app x 项目。完成入口安装和 easycom 配置后，组件可直接在模板中使用。
+本章说明如何通过 DCloud 插件市场把 uvx-ui 接入现有 uni-app x 项目。完成入口安装和 easycom 配置后，组件可直接在模板中使用。
 
 ## 准备工作
 
@@ -10,23 +10,11 @@
 - HBuilderX 已安装 sass/scss 编译插件；
 - 开发工具版本满足所用组件文档标注的最低要求。
 
-## 1. 导入组件库
+## 1. 从插件市场安装
 
-将 `uvx-ui` 放入项目的 `uni_modules` 目录：
+访问 [uvx-ui 插件市场](https://ext.dcloud.net.cn/plugin?name=uvx-ui)，点击“使用 HBuilderX 导入插件”，选择目标 uni-app x 项目完成安装。
 
-```text
-项目根目录/
-└── uni_modules/
-    └── uvx-ui/
-```
-
-通过插件市场导入时，请同时导入插件声明的依赖：
-
-- `lime-i18n`
-- `uvx-animation`
-- `uvx-system-settings`
-
-不要只复制单个组件目录。部分动画、系统设置和公共工具会引用同级 `uni_modules` 插件。
+uvx-ui 依赖 `lime-dayuts` 和 `uvx-tools`。导入时如有依赖安装提示，请按照 HBuilderX 的提示一并安装。不要单独下载或复制某个组件目录。
 
 ## 2. 配置 easycom
 
@@ -127,10 +115,10 @@ export function createApp() {
 
 | 现象 | 检查项 |
 | --- | --- |
-| 找不到 `uvx-*` 组件 | 检查 `pages.json` 中的 `easycom.custom` 映射及组件安装位置，然后重新编译项目 |
+| 找不到 `uvx-*` 组件 | 确认 uvx-ui 已从插件市场导入，检查 `pages.json` 中的 `easycom.custom` 映射，然后重新编译项目 |
 | 找不到语言包 | 确认根目录存在 `locales/zh-cn.json`、`zh-tw.json` 和 `en.json` |
 | SCSS 编译失败 | 在 HBuilderX 插件市场安装或更新 sass/scss 编译插件 |
 | 工具类或主题变量不生效 | 确认 `App.uvue` 已引入 `uvx-ui/index.scss` |
-| 找不到动画或系统设置模块 | 补齐 `uvx-animation`、`uvx-system-settings` 等依赖 |
+| 找不到日期或原生工具模块 | 重新从插件市场导入 uvx-ui，并按 HBuilderX 提示安装 `lime-dayuts` 和 `uvx-tools` |
 
 下一步阅读[快速上手](/guide/quickstart)，创建一个完整页面。

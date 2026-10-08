@@ -22,7 +22,7 @@
 
 1. 组件挂载时调用 `uni.getNetworkType`，随后通过 `uni.onNetworkStatusChange` 持续监听，卸载时会解除监听。
 2. 点击重试会重新检查网络并显示 Toast，同时始终触发 `retry`；检查结果还会触发 `connected` 或 `disconnected`。
-3. “前往设置”入口由 `APP` 条件编译控制，并依赖项目中的 `uvx-system-settings` 插件，H5 和小程序不显示。
+3. “前往设置”入口由 `APP` 条件编译控制，并通过 `uvx-tools` 插件调用系统设置，H5 和小程序不显示。
 4. 组件仅依据系统网络类型判断是否联网，不代表业务接口一定可访问。
 
 :::

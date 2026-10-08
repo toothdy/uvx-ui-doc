@@ -18,7 +18,7 @@ uvx-ui 是面向 uni-app x 的跨端 UI 组件库，使用 UTS 与 UVue 编写�
 
 首次接入建议按以下顺序阅读：
 
-1. [安装](/guide/install)：导入组件库、依赖、全局样式和语言包。
+1. [安装](/guide/install)：从 DCloud 插件市场安装组件库，并配置全局样式和语言包。
 2. [快速上手](/guide/quickstart)：创建第一个使用 uvx-ui 的 UVue 页面。
 3. [配置](/guide/config)：设置字号、弹层基础层级和语言。
 4. [主题与样式](/guide/theme)：使用亮暗主题和自定义品牌色。

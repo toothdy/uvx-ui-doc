@@ -28,7 +28,7 @@
 
 1. 动画模式共 7 种：`fade`、`slide-top`、`slide-bottom`、`slide-left`、`slide-right`、`zoom-in`、`zoom-out`，默认 `fade`。`zoom-in` 由 0.92 放大进场、`zoom-out` 由 1.2 缩小进场，两者均伴随透明度过渡。
 2. 通过 `show` 控制显隐：`true` 播放入场、`false` 播出场，出场动画播完后才卸载节点。App/H5 端以 `v-if` 卸载；微信小程序端节点常驻，以内联 `display:none` 隐藏，且每次进场前会重置上次动画残留的样式（fade 进场重置 `transform`，其余模式进场重置 `opacity`），跨模式切换安全。
-3. 各端帧驱动方式存在差异：Android 通过 `uvx-animation` uts 插件以 Choreographer 原生帧回调驱动；iOS、鸿蒙、H5 使用 `requestAnimationFrame`；微信小程序端使用 `setTimeout`（约 16ms 一帧，接近 60fps）。
+3. 各端帧驱动方式存在差异：Android 通过 `uvx-tools` 插件以 Choreographer 原生帧回调驱动；iOS、鸿蒙、H5 使用 `requestAnimationFrame`；微信小程序端使用 `setTimeout`（约 16ms 一帧，接近 60fps）。
 4. 初始 `:show="true"` 时，组件在挂载后自动播放入场动画。
 5. `easing` 传入 CSS 缓动名（`linear`、`ease`、`ease-in`、`ease-out`、`ease-in-out`），其余按引擎预设名直接透传（如 `easeInQuad`），无法识别的名称按线性处理。
 6. 命令式动画的 `step` 支持 `translate`、`rotate`、`scale`、`skew` 等 `transform` 子属性与 `opacity` 等数值属性，纯数字值自动补单位（`rotate`/`skew` 补 `deg`，`translate` 补 `px`）；`background`、`color` 等颜色属性按 RGBA 插值。

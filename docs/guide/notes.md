@@ -51,7 +51,7 @@ console.log(platformName);
 ## 全局名称与依赖
 
 - uvx-ui 会占用应用全局属性 `$uvx`，业务代码不要覆盖同名属性。
-- 不要删除 `uvx-animation`、`uvx-system-settings` 等由组件库引用的 `uni_modules` 依赖。
+- 不要删除插件市场随 uvx-ui 安装的 `lime-dayuts` 和 `uvx-tools` 依赖。
 - 项目根目录的三个业务语言包是入口导入项，文件不存在会导致编译失败。
 
 ## 排查顺序
