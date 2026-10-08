@@ -25,6 +25,12 @@ export default defineConfig({
          },
       },
    },
+   markdown: {
+      // Shiki 无内置 uts 语言，按 TS 语法高亮（uts 是强类型 TS）
+      languageAlias: {
+         uts: "ts",
+      },
+   },
    themeConfig: {
       logo: "/logo.jpeg",
       siteTitle: "uvx-ui",
