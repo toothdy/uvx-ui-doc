@@ -12,9 +12,9 @@
 
 ## 1. 从插件市场安装
 
-访问 [uvx-ui 插件市场](https://ext.dcloud.net.cn/plugin?name=uvx-ui)，点击“使用 HBuilderX 导入插件”，选择目标 uni-app x 项目完成安装。
+访问 [插件市场](https://ext.dcloud.net.cn/plugin?name=uvx-ui)，点击“使用 HBuilderX 导入插件”，选择目标 uni-app x 项目完成安装。
 
-uvx-ui 依赖 `lime-dayuts` 和 `uvx-tools`。导入时如有依赖安装提示，请按照 HBuilderX 的提示一并安装。不要单独下载或复制某个组件目录。
+uvx-ui 依赖 `uvx-tools`。导入时如有依赖安装提示，请按照 HBuilderX 的提示一并安装。不要单独下载或复制某个组件目录。
 
 ## 2. 配置 easycom
 
@@ -119,6 +119,6 @@ export function createApp() {
 | 找不到语言包 | 确认根目录存在 `locales/zh-cn.json`、`zh-tw.json` 和 `en.json` |
 | SCSS 编译失败 | 在 HBuilderX 插件市场安装或更新 sass/scss 编译插件 |
 | 工具类或主题变量不生效 | 确认 `App.uvue` 已引入 `uvx-ui/index.scss` |
-| 找不到日期或原生工具模块 | 重新从插件市场导入 uvx-ui，并按 HBuilderX 提示安装 `lime-dayuts` 和 `uvx-tools` |
+| 找不到原生工具模块 | 重新从插件市场导入 uvx-ui，并按 HBuilderX 提示安装 `uvx-tools` |
 
 下一步阅读[快速上手](/guide/quickstart)，创建一个完整页面。

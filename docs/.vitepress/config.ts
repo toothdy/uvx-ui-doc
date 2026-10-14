@@ -8,7 +8,7 @@ export default defineConfig({
    cleanUrls: false,
    lastUpdated: true,
    head: [
-      ["link", { rel: "icon", type: "image/jpeg", href: "/logo.jpeg" }],
+      ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
       [
          "meta",
          {
@@ -17,7 +17,13 @@ export default defineConfig({
                "uvx-ui,uvx-ui组件库,uni-app x,uniappx,uniapp,uni-app,uvue,uts,UI组件库,UI框架,跨端组件库,Android,iOS,鸿蒙,HarmonyOS,微信小程序,H5",
          },
       ],
+      // 百度统计（tongji.baidu.com）
+      ["script", { src: "https://hm.baidu.com/hm.js?2aa673129048d7c4397a35ff063c128f", async: "" }],
    ],
+   // 站点地图：构建时生成 sitemap.xml，供搜索引擎抓取
+   sitemap: {
+      hostname: "https://www.uvxui.cn",
+   },
    vite: {
       resolve: {
          alias: {
@@ -38,7 +44,6 @@ export default defineConfig({
          { text: "演示", link: "/demo" },
          { text: "指南", link: "/guide/intro" },
          { text: "组件", link: "/components/intro" },
-         { text: "API", link: "/components/intro#api" },
       ],
       sidebar: {
          "/guide/": [
@@ -51,6 +56,10 @@ export default defineConfig({
                   { text: "配置", link: "/guide/config" },
                   { text: "注意事项", link: "/guide/notes" },
                   { text: "更新日志", link: "/guide/changelog" },
+                  {
+                     text: "加入QQ群",
+                     link: "https://qun.qq.com/universal-share/share?ac=1&authKey=EXb1USG113TxrgF2eNeK8KE%2FNaD14fxUK%2BLb4nmPbRsUZOdYni7DaQ1tNuIL36GO&busi_data=eyJncm91cENvZGUiOiI2MjYwNzY5NTEiLCJ0b2tlbiI6IkwwZ2tuQ0M3UUtDSWE5bXdIMFhYMVAvSkRCdVc4WjZwMS9WM3dxamMzbGRYVFBDZUc4b24yMDRVbmtLb3dSSG8iLCJ1aW4iOiI4MjQxNDU1MTEifQ%3D%3D&data=LuDB_ZX7Xg4Buy_dO1ngnFDhDdFak_APluZSSvaO3YNpNPuMN0xc9IgRzZjIMfeLegecU_TqhfSe1iROWPxhGA&svctype=4&tempid=h5_group_info",
+                  },
                ],
             },
             {
@@ -221,7 +230,7 @@ export default defineConfig({
             },
          },
       },
-      socialLinks: [{ icon: "github", link: "https://github.com/toothdy" }],
+      socialLinks: [{ icon: "github", link: "https://github.com/toothdy" }, { icon: "gitee", link: "https://gitee.com/toothdy" }],
       footer: {
          message: "uvx-ui · uni-app x 组件库",
          copyright: "Released under the MIT License.",
